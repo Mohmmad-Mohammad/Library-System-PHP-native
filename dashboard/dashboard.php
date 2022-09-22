@@ -8,11 +8,8 @@ if (!isset($_SESSION['adminInfo'])) {
 
 
 ?>
-
 <!-- /#sidebar-wrapper -->
-
 <!-- Page Content -->
-
 <div class="container-fluid">
     <div class="content">
         <div class="statistics text-center">
@@ -25,10 +22,8 @@ if (!isset($_SESSION['adminInfo'])) {
                 </div>
                 <div class="col-sm-6">
                     <div class="statistic">
-
                         <h3></h3>
-                        < /h3>
-                            <p>عدد التصنيفات</p>
+                        <p>عدد التصنيفات</p>
                     </div>
                 </div>
             </div>
