@@ -11,18 +11,38 @@ include 'include/header.php';
 <!-- Start Delete category -->
 
 <!-- End Delete category -->
+<?php
+if($_SERVER["REQUEST_METHOD"]=='POST'){
+    $categoryName = $_POST['categoryName'];
+    if(empty($categoryName)){
+        $error =  "<div class='alert alert-danger'>"."الرجاء ملء الحقل ادناه"."</div>";
+    }else{
+        $query = "INSERT INTO categories(name) VALUES('$categoryName')";
+        $result = mysqli_query($con,$query);
+        if(isset($result)){
+            $success =  "<div class='alert alert-success'>"." تم اضافة التصنيف بنجاح "."</div>";
+        }
+    }
+}
 
-
-
+?>
 <div class="container-fluid">
     <!-- Start categories section -->
     <div class="categories">
 
+        <?php
+        if(isset($error)){
+        echo $error;
+        }
+        if(isset($success)){
+            echo $success;
+            }
+?>
         <div class="add-cat">
-            <form action="" method="POST">
+            <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
                 <div class="form-group">
                     <label for="cat">إضافة تصنيف :</label>
-                    <input type="text" id="cat" class="form-control" name="category">
+                    <input type="text" id="cat" class="form-control" name="categoryName">
                 </div>
                 <button class="custom-btn">إضافة</button>
             </form>
