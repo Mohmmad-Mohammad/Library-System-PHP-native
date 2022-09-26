@@ -29,7 +29,6 @@ if($_SERVER["REQUEST_METHOD"]=='POST'){
 <div class="container-fluid">
     <!-- Start categories section -->
     <div class="categories">
-
         <?php
         if(isset($error)){
         echo $error;
@@ -37,7 +36,7 @@ if($_SERVER["REQUEST_METHOD"]=='POST'){
         if(isset($success)){
             echo $success;
             }
-?>
+        ?>
         <div class="add-cat">
             <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
                 <div class="form-group">
@@ -58,17 +57,25 @@ if($_SERVER["REQUEST_METHOD"]=='POST'){
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Fetch categories from database -->
+                    <?php
+                    $query = "SELECT * FROM categories ORDER BY id DESC";
+                    $res = mysqli_query($con,$query);
+                    $sNo = 0;
+                    while($row = mysqli_fetch_assoc($res)){
+                    $sNo ++;
+                    ?>
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td><?php echo $sNo; ?></td>
+                        <td><?php echo $row['name']; ?></td>
+                        <td> <?php echo $row['date']; ?></td>
                         <td>
+
                             <a href="edit-cat.php" class="custom-btn">تعديل</a>
                             <a href="categories.php" class="custom-btn confirm">حذف</a>
                         </td>
                     </tr>
 
+                    <?php }?>
                 </tbody>
             </table>
             <!-- Start pagination -->
