@@ -1,6 +1,11 @@
 <?php
+session_start();
 include 'include/connection.php';
 include 'include/header.php';
+if (!isset($_SESSION['adminInfo'])) {
+    header('Location:index.php');
+    exit();
+    } else {
 
 ?>
 
@@ -64,7 +69,14 @@ if($_SERVER["REQUEST_METHOD"]=='POST'){
                 </thead>
                 <tbody>
                     <?php
-                    $query = "SELECT * FROM categories ORDER BY id DESC";
+                    if(isset($_GET['page'])){
+                        $page = $_GET['page'];
+                    }else{
+                        $page = 1;
+                    }
+                    $limit = 5;
+                    $start = ($page - 1) * $limit; 
+                    $query = "SELECT * FROM categories ORDER BY id DESC LIMIT  $start, $limit";
                     $res = mysqli_query($con,$query);
                     $sNo = 0;
                     while($row = mysqli_fetch_assoc($res)){
@@ -79,15 +91,39 @@ if($_SERVER["REQUEST_METHOD"]=='POST'){
                             <a href="categories.php?id=<?php echo $row['id']; ?>" class="custom-btn confirm">حذف</a>
                         </td>
                     </tr>
-
                     <?php }?>
                 </tbody>
             </table>
             <!-- Start pagination -->
-
-            <nav aria-label=" Page navigation example">
+            <?php
+            $query = "SELECT * FROM categories";
+            $result = mysqli_query($con, $query);
+            $total_cat = mysqli_num_rows($result);
+            $total_pages = ceil($total_cat / $limit);
+            ?>
+            <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="categories.php">
+                    <li class="page-item"><a class="page-link" href="categories.php?page=<?php if (($page - 1) > 0) {
+                        echo  $page - 1;
+                        } else {
+                        echo 1;
+                        }
+                        ?>">السابق</a></li>
+                    <?php
+                    for ($i = 1; $i <= $total_pages; $i++) {
+                    ?>
+                    <li class="page-item"><a class="page-link"
+                            href="categories.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                    <?php
+                    }
+                        ?>
+                    <li class="page-item"><a class="page-link" href="categories.php?page=<?php
+                        if (($page + 1) < $total_pages) {
+                        echo $page + 1;
+                        } elseif (($page + 1) >= $total_pages) {
+                        echo $total_pages;
+                        }
+                        ?>">التالي</a></li>
                 </ul>
             </nav>
             <!-- End pagination -->
@@ -100,5 +136,9 @@ if($_SERVER["REQUEST_METHOD"]=='POST'){
 </div>
 <!-- /#wrapper -->
 <?php
-  include 'include/footer.php';
-  ?>
+include 'include/footer.php';
+?>
+
+<?php
+}
+?>
