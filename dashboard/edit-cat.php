@@ -11,6 +11,10 @@ if (!isset($_SESSION['adminInfo'])) {
 
 <!-- /#sidebar-wrapper -->
 
+
+
+
+
 <!-- Page Content -->
 
 <!-- Fetch categoryName form database -->

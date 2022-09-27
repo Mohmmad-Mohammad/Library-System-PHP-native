@@ -8,9 +8,15 @@ include 'include/header.php';
 
 <!-- Page Content -->
 
-<!-- Start Delete category -->
-
-<!-- End Delete category -->
+<!-- Start Delete -->
+<?php
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
+    $query ="DELETE FROM categories WHERE id ='$id'";
+    $result= mysqli_query($con,$query);
+}
+?>
+<!-- End Delete -->
 <?php
 if($_SERVER["REQUEST_METHOD"]=='POST'){
     $categoryName = $_POST['categoryName'];
