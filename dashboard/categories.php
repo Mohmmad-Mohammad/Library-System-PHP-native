@@ -14,7 +14,7 @@ include 'include/header.php';
 <?php
 if($_SERVER["REQUEST_METHOD"]=='POST'){
     $categoryName = $_POST['categoryName'];
-    if(empty($categoryName)){
+    if(empty($name)){
         $error =  "<div class='alert alert-danger'>"."الرجاء ملء الحقل ادناه"."</div>";
     }else{
         $query = "INSERT INTO categories(name) VALUES('$categoryName')";
@@ -69,9 +69,8 @@ if($_SERVER["REQUEST_METHOD"]=='POST'){
                         <td><?php echo $row['name']; ?></td>
                         <td> <?php echo $row['date']; ?></td>
                         <td>
-
-                            <a href="edit-cat.php" class="custom-btn">تعديل</a>
-                            <a href="categories.php" class="custom-btn confirm">حذف</a>
+                            <a href="edit-cat.php?id=<?php echo $row['id']; ?> " class="custom-btn">تعديل</a>
+                            <a href="categories.php?id=<?php echo $row['id']; ?>" class="custom-btn confirm">حذف</a>
                         </td>
                     </tr>
 
@@ -80,7 +79,7 @@ if($_SERVER["REQUEST_METHOD"]=='POST'){
             </table>
             <!-- Start pagination -->
 
-            <nav aria-label="Page navigation example">
+            <nav aria-label=" Page navigation example">
                 <ul class="pagination">
                     <li class="page-item"><a class="page-link" href="categories.php">
                 </ul>

@@ -9,12 +9,12 @@ if (!isset($_SESSION['adminInfo'])) {
 
 ?>
 
-    <!-- /#sidebar-wrapper -->
+<!-- /#sidebar-wrapper -->
 
-    <!-- Page Content -->
+<!-- Page Content -->
 
-    <!-- Fetch categoryName form database -->
-    <?php
+<!-- Fetch categoryName form database -->
+<?php
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
 
@@ -24,33 +24,33 @@ if (!isset($_SESSION['adminInfo'])) {
     }
     ?>
 
-    <!-- Edit category -->
-    <?php
+<!-- Edit category -->
+<?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $categoryName = $_POST['category'];
-        $query = "UPDATE categories SET categoryName='$categoryName' WHERE id = '$id'";
+        $name = $_POST['category'];
+        $query = "UPDATE categories SET name='$name' WHERE id = '$id'";
         $edit = mysqli_query($con, $query);
         header("Location: categories.php");
         exit();
     }
     ?>
 
-    <div class="container-fluid">
-        <div class="edit-cat">
-            <form action="edit-cat.php?id=<?php echo $row['id']; ?>" method="POST">
-                <div class="form-group">
-                    <label for="cat">تعديل التصنيف</label>
-                    <input type="text" class="form-control" id="cat" value="<?php echo $row['categoryName']; ?>" name="category">
-                </div>
-                <button class="custom-btn">تعديل</button>
-            </form>
-        </div>
+<div class="container-fluid">
+    <div class="edit-cat">
+        <form action="edit-cat.php?id=<?php echo $row['id']; ?>" method="POST">
+            <div class="form-group">
+                <label for="cat">تعديل التصنيف</label>
+                <input type="text" class="form-control" id="cat" value="<?php echo $row['name']; ?>" name="category">
+            </div>
+            <button class="custom-btn">تعديل</button>
+        </form>
     </div>
-    <!-- /#page-content-wrapper -->
+</div>
+<!-- /#page-content-wrapper -->
 
-    </div>
-    <!-- /#wrapper -->
-    <?php
+</div>
+<!-- /#wrapper -->
+<?php
     include 'include/footer.php';
     ?>
 
