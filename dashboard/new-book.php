@@ -25,7 +25,7 @@ if (!isset($_SESSION['adminInfo'])) {
         $bookName = $_FILES['book']['name'];
         $bookTmp = $_FILES['book']['tmp_name'];
 
-        if (empty($bookTitle) ||  empty($bookCat) ) {
+        if (empty($bookTitle) || empty($bookAuthor) || empty($bookCat) || empty($bookContent)) {
             $error = "<div class='alert alert-danger'>" . "الرجاء ملء الحقول أدناه" . "</div>";
         } elseif (empty($imageName)) {
             $error = "<div class='alert alert-danger'>" . "الرجاء إختيار صورة مناسبة" . "</div>";
@@ -41,6 +41,8 @@ if (!isset($_SESSION['adminInfo'])) {
             $query = "INSERT INTO books(title,author,category,cover,book,content)
             VALUES('$bookTitle','$bookAuthor','$bookCat','$cover','$book','$bookContent')";
             $res = mysqli_query($con, $query);
+            // session_start();
+            // header('Location:new-book.php');
             if (isset($res)) {
                 $success = "<div class='alert alert-success'>" . "تم إضافة الكتاب بنجاح" . "</div>";
             }
@@ -61,8 +63,9 @@ if (!isset($_SESSION['adminInfo'])) {
         <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="title">عنوان الكتاب</label>
-                <input type="text" id="title" class="form-control" name="title"
-                    value="<?php if (isset($bookTitle)) {                                                   } ?>">
+                <input type="text" id="title" class="form-control" name="title" value="<?php if (isset($bookTitle)) {
+                                                                                                    echo $bookTitle;
+                                                                                                } ?>">
             </div>
             <div class="form-group">
                 <label for="author">إسم الكاتب</label>
@@ -95,9 +98,9 @@ if (!isset($_SESSION['adminInfo'])) {
             </div>
             <div class="form-group">
                 <label for="img">نبذة عن الكتاب</label>
-                <textarea name="c
-                ontent" id="" cols="30" rows="10"
-                    class="form-control"><?php if (isset($bookContent)) {                                             } ?></textarea>
+                <textarea name="content" id="" cols="30" rows="10" class="form-control"><?php if (isset($bookContent)) {
+                                                                                echo $bookContent;
+                                                                            } ?></textarea>
             </div>
             <button class="custom-btn">نشر الكتاب</button>
         </form>

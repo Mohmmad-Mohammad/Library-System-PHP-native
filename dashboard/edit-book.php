@@ -9,11 +9,11 @@ if (!isset($_SESSION['adminInfo'])) {
 ?>
 
 
-    <!-- /#sidebar-wrapper -->
+<!-- /#sidebar-wrapper -->
 
-    <!-- Page Content -->
+<!-- Page Content -->
 
-    <?php
+<?php
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $bookTitle = $_POST['bookTitle'];
         $bookAuthor = $_POST['authorName'];
@@ -41,12 +41,12 @@ if (!isset($_SESSION['adminInfo'])) {
             $book = rand(0, 1000) . "_" . $bookName;
             move_uploaded_file($bookTmp, "../uploads/books/" . $book);
             $query          = "UPDATE books SET 
-            bookTitle      = '$bookTitle',
-            bookAuthor  = '$bookAuthor',
-            bookCat        = '$bookCat',
-            bookCover    = $bookCover',
+            title      = '$bookTitle',
+            author  = '$bookAuthor',
+            category        = '$bookCat',
+            cover    = $bookCover',
             book             = '$book',
-            bookContent = '$bookContent'
+            content = '$bookContent'
             WHERE id      ='$id'
             ";
             $res = mysqli_query($con, $query);
@@ -57,10 +57,10 @@ if (!isset($_SESSION['adminInfo'])) {
     }
     ?>
 
-    <div class="container-fluid">
-        <!-- Start new book -->
-        <div class="new-book">
-            <?php
+<div class="container-fluid">
+    <!-- Start new book -->
+    <div class="new-book">
+        <?php
             if (isset($error)) {
                 echo $error;
             } elseif (isset($success)) {
@@ -68,58 +68,58 @@ if (!isset($_SESSION['adminInfo'])) {
             }
 
             ?>
-            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="title">عنوان الكتاب</label>
-                    <input type="text" id="title" class="form-control" name="bookTitle" value="<?php if (isset($bookTitle)) {
+        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">عنوان الكتاب</label>
+                <input type="text" id="title" class="form-control" name="bookTitle" value="<?php if (isset($bookTitle)) {
                                                                                                     echo $bookTitle;
                                                                                                 } ?>">
-                </div>
-                <div class="form-group">
-                    <label for="author">إسم الكاتب</label>
-                    <input type="text" id="author" class="form-control" name="authorName" value="<?php if (isset($bookAuthor)) {
+            </div>
+            <div class="form-group">
+                <label for="author">إسم الكاتب</label>
+                <input type="text" id="author" class="form-control" name="authorName" value="<?php if (isset($bookAuthor)) {
                                                                                                         echo $bookAuthor;
                                                                                                     } ?>">
-                </div>
-                <div class="form-group">
-                    <label for="title">التصنيف</label>
-                    <select class="form-control" name="bookCat">
-                        <option></option>
-                        <?php
+            </div>
+            <div class="form-group">
+                <label for="title">التصنيف</label>
+                <select class="form-control" name="bookCat">
+                    <option></option>
+                    <?php
                         $query = "SELECT categoryName FROM categories";
                         $result = mysqli_query($con, $query);
                         while ($row = mysqli_fetch_assoc($result)) {
                         ?>
-                            <option><?php echo $row['categoryName']; ?></option>
-                        <?php
+                    <option><?php echo $row['categoryName']; ?></option>
+                    <?php
                         }
                         ?>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="img">غلاف الكتاب</label>
-                    <input type="file" class="form-control" name="bookCover">
-                </div>
-                <div class="form-group">
-                    <label for="img">ملف الكتاب</label>
-                    <input type="file" class="form-control" name="book">
-                </div>
-                <div class="form-group">
-                    <label for="img">نبذة عن الكتاب</label>
-                    <textarea name="bookContent" id="" cols="30" rows="10" class="form-control"><?php if (isset($bookContent)) {
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="img">غلاف الكتاب</label>
+                <input type="file" class="form-control" name="bookCover">
+            </div>
+            <div class="form-group">
+                <label for="img">ملف الكتاب</label>
+                <input type="file" class="form-control" name="book">
+            </div>
+            <div class="form-group">
+                <label for="img">نبذة عن الكتاب</label>
+                <textarea name="bookContent" id="" cols="30" rows="10" class="form-control"><?php if (isset($bookContent)) {
                                                                                                     echo $bookContent;
                                                                                                 } ?></textarea>
-                </div>
-                <button class="custom-btn">نشر الكتاب</button>
-            </form>
-        </div>
-        <!-- End new book -->
+            </div>
+            <button class="custom-btn">نشر الكتاب</button>
+        </form>
     </div>
-    <!-- /#page-content-wrapper -->
+    <!-- End new book -->
+</div>
+<!-- /#page-content-wrapper -->
 
-    </div>
-    <!-- /#wrapper -->
-    <?php
+</div>
+<!-- /#wrapper -->
+<?php
     include 'include/footer.php';
     ?>
 
