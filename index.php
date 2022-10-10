@@ -34,8 +34,8 @@ include 'layout/include/header.php';
                                 href="book.php?id=<?php echo $row['id']; ?>&&category=<?php echo $row['category']; ?>"><?php echo $row['title']; ?></a>
                         </h4>
                         <p class="card-text"><?php echo mb_substr($row['content'], 0, 150, "UTF-8"); ?></p>
-                        <a href="category.php?id=<?php echo $row['id']; ?>&&category=<?php echo $row['category']; ?>">
-                            <button class="custom-btn">تحميل الكتاب</button>
+                        <a href="book.php?id=<?php echo $row['id']; ?>&&category=<?php echo $row['category']; ?>">
+                            <button class="custom-btn">عرض الكتاب</button>
                         </a>
                     </div>
                 </div>
