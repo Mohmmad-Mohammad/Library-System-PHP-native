@@ -32,13 +32,13 @@
                         <a href="index.php" class="nav-link">الرئيسية</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">الأقسام</a>
+                        <a href="categories.php" class="nav-link">الأقسام</a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">تواصل معنا</a>
                     </li>
 
-                    <a href="dashboard/dashboard.php" target="_blank" class="dashboard-btn">لوحة التحكم</a>
+                    <a href="dashboard/dashboard.php" target="_blank" class="dashboard-btn">تسجيل الدخول </a>
                 </ul>
             </div>
         </div>
